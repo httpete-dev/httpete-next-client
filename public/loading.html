@@ -1,0 +1,46 @@
+<!-- electron/loading.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            background-color: #282c34; /* Background color */
+            color: white; /* Text color */
+            font-family: sans-serif;
+        }
+        .spinner {
+            border: 30px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff2d; /* Spinner color */
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-top: -235px;
+            animation: spin 1s linear infinite;
+        }
+        .rotating-image {
+            transition: transform 0.5s ease; /* Smooth rotation transition */
+            transform-origin: 50% 50%; /* Set pivot point to center */
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+        <img class="rotating-image" src="../electron/HTTPETE-icon.png" width="25%" style="margin:2rem;"/>
+        <div class="spinner">
+        </div>
+        <h2>Loading...</h2>
+</body>
+</html>
