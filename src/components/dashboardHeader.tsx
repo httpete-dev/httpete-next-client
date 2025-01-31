@@ -29,7 +29,7 @@ const menuEntries = [
     // { title: 'Code', icon: <Code className="w-5 h-5 text-white" />, path: '/dashboard/code' },
     { title: 'API', icon: <Globe className="w-5 h-5 text-white" />, path: '/dashboard' },
     { title: 'Documentation', icon: <File className="w-5 h-5 text-white" />, path: '/dashboard/docs' },
-    // { title: 'Community', icon: <Users className="w-6 h-6 text-white" />, path: '/dashboard/community' },
+    { title: 'Community', icon: <Users className="w-6 h-6 text-white" />, path: '/dashboard/community' },
     { title: 'Settings', icon: <Settings className="w-5 h-5 text-white" />, path: '/settings' },
     // { title: 'Sign out', icon: <LogOutIcon className="w-6 h-6 text-white" />, path: '/sign-out' }
 ]

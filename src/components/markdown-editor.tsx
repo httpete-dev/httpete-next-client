@@ -105,7 +105,7 @@ const MarkdownEditor = (props: MarkdownEditorProps) => {
       textarea.style.height = 'auto'
       textarea.style.height = `${textarea.scrollHeight}px`
     }
-  }, [props.activeEndpoint.documentation.text])
+  }, [props.activeEndpoint?.documentation?.text])
 
   const toggleViewMode = () => {
     setViewMode(current => {

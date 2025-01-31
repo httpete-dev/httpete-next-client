@@ -82,7 +82,7 @@ const DocsPage = (props: DocsPageProps) => {
                     <div className='col-span-2'>
             
                         <section className="bg-gray-800 p-6 rounded-lg" style={{maxHeight:'50vh', overflowY:'auto', overflowX:'hidden'}}>
-                            <DocFileTree collections={props.collections} data={props.docs} setActiveDocumentation={props.setActiveDocumentation} />
+                            <DocFileTree collections={props.activeWorkspace.collections} data={props.docs} setActiveDocumentation={props.setActiveDocumentation} />
                         </section>
 
                         {recentlyUpdated.length > 0 && 

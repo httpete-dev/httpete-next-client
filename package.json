@@ -6,10 +6,10 @@
   "author": "silvahimself",
   "description": "Making APIs great again.",
   "scripts": {
-    "start": "next start",
+    "start": "next start -p 56969",
     "build": "next build",
     "check": "next lint && tsc --noEmit",
-    "dev": "next dev --turbo -p 56969",
+    "dev": "next dev --turbo",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",

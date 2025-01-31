@@ -275,21 +275,11 @@ export default function CommunityPage() {
     return (
         <main className="min-h-screen bg-gray-900 text-gray-100">
             <div className="flex items-start justify-center mx-auto px-4 sm:px-6 lg:px-8 py-4 pt-12">
-                <div className='flex flex-col items-center justify-center'>
-                    <Image src="/icon.png" alt="logo" width={200} height={200} />
-                    <h1>Coming Soon...</h1>
-                    <p className='mt-2'>In the meantime, feel free to
-                        <a href="https://discord.gg/8a9t2c9" className='p-1' target="_blank" rel="noreferrer">
-                            join our Discord server
-                        </a>
-                        for updates and discussions.
-                    </p>
-                </div>
                 <div className="grid grid-cols-4 gap-8">
                     <div className="lg:col-span-1">
 
                         {/* Guides */}
-                        {/* <section className="mb-12">
+                        <section className="mb-12">
 
                             <div className="flex justify-between items-center mb-4">
                                 <h2 className="text-2xl font-bold">Guides</h2>
@@ -309,10 +299,10 @@ export default function CommunityPage() {
                                     </button>
                                 ))}
                             </div>
-                        </section> */}
+                        </section>
 
                         {/* Forum Discussions */}
-                        {/* <section className="mb-12">
+                        <section className="mb-12">
                             <div className="flex justify-between items-center mb-4">
                                 <h2 className="text-2xl font-bold">Forum Discussions</h2>
                                 <button
@@ -347,10 +337,10 @@ export default function CommunityPage() {
                             >
                                 View all discussions
                             </button>
-                        </section> */}
+                        </section>
 
                         {/* Feature Requests */}
-                        {/* <section className="mb-12">
+                        <section className="mb-12">
                             <div className="flex justify-between items-center mb-4">
                                 <h2 className="text-2xl font-bold">Feature Requests</h2>
                                 <button
@@ -386,10 +376,10 @@ export default function CommunityPage() {
                             >
                                 View all feature requests
                             </button>
-                        </section> */}
+                        </section>
                     </div>
 
-                    {/* <div className='lg:col-span-2'>
+                    <div className='lg:col-span-2'>
                         <h1 className='ml-8'>Feed</h1>
                         <div className='flex flex-row-reverse mr-8 -mt-12'>
 
@@ -483,11 +473,11 @@ export default function CommunityPage() {
                         <section className="bg-gray-800 p-6 rounded-lg">
                             <Achievements expanded={false} />
                         </section>
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
-            {/* {modalContent && (
+            {modalContent && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
                     <div className="bg-gray-800 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
                         <div className="p-6">
@@ -763,6 +753,6 @@ export default function CommunityPage() {
                             )}
                         </div>
                     </div>
-                </div>)} */}
+                </div>)}
         </main>)
 }

@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { baseUrl, Collection, Endpoint, Workspace } from "~/model";
 import Loading from "./Loading";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 type PostmanCollection = {
   info: {
@@ -55,7 +56,11 @@ type PostmanResponse = {
   header?: PostmanHeader[];
 };
 
-export default function ImportDialog() {
+type ImportDialogProps = {
+  searchParams: ReadonlyURLSearchParams;
+}
+
+export default function ImportDialog(props: ImportDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [importedData, setImportedData] = useState<PostmanCollection | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -81,11 +86,11 @@ export default function ImportDialog() {
     }
   };
 
-  const importData = async () => {
+  const importData = async (workspaceId: number) => {
     const payload = {
       userId: session?.user?.id, 
       userName: session?.user?.name,
-      workspaceId: JSON.parse(localStorage.getItem('activeWorkspace') ?? '-1'),
+      workspaceId: workspaceId,
       data: importedData
     }
 
@@ -160,9 +165,10 @@ export default function ImportDialog() {
               {importing ? <Loading text={"Importing data..."}/> : <button
                 className="px-4 py-2 text-red-400 rounded hover:bg-red-400 hover:text-white"
                 onClick={() => {
-                  const ws = (JSON.parse(localStorage.getItem('activeWorkspace') ?? "{}") as Workspace);
+                  const params = new URLSearchParams(props.searchParams);
+                  const ws = params.get('ws');
 
-                  importData().then(res => {
+                  importData(parseInt(ws ?? '-1') ).then(res => {
                     window.location.reload();
                   })
                 }}

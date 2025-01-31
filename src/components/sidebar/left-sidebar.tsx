@@ -101,7 +101,7 @@ const LeftSideBar = (props: LeftSidebarProps) => {
           : <>
             <div className="flex justify-between items-center mb-2 mt-2">
               <h2 className="font-semibold mb-2">Collections</h2>
-              <ImportDialog />
+              <ImportDialog searchParams={searchParams} />
 
               <CreateCollectionDialog open={isNewCollectionModalOpen} onOpenChange={setIsNewCollectionModalOpen}
                 updateCollections={updateCollections}
@@ -114,11 +114,12 @@ const LeftSideBar = (props: LeftSidebarProps) => {
                 activeCollection={props.activeCollection}
                 updateParams={props.updateParams}
                 setLoading={props.setLoading}
-                updateCollections={updateCollections} setActiveEndpoint={function (endpoint: Endpoint): void {
-                  throw new Error("Function not implemented.");
-                } } deleteEndpoint={function (id: number): void {
-                  throw new Error("Function not implemented.");
-                } } />
+                updateCollections={updateCollections} 
+                setActiveEndpoint={props.setActiveEndpoint} deleteEndpoint={
+                  (endpoint: Endpoint) => {
+                    throw new Error("Function not implemented.");
+                  }
+                } />
           }
           </>
         }

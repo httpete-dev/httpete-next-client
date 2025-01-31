@@ -11,7 +11,7 @@ export function prettifyJson(jsonString: string): string | null {
       return JSON.stringify(parsedJson, null, 4); // Prettify with 4 spaces for indentation
   } catch (error) {
       console.error("Invalid JSON:", error.message);
-      return null; // Return null if the input is not valid JSON
+      return jsonString; // Fallback to original value
   }
 }
 

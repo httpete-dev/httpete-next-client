@@ -30,7 +30,8 @@ export async function getLocalWorkspaces() {
 
 export async function getWorkspaces(userId: number) {
     try {
-        const response = await axios.get(`${baseUrl}/api/workspaces?userId=${userId}`);
+        console.log('getWorkspaces', userId, baseUrl)
+        const response = await axios.get(`${baseUrl}/workspace/get-for-user?userId=${userId}`);
         return response.data as Workspace[];
     } catch (error) {
         console.error('Error fetching workspaces:', error);

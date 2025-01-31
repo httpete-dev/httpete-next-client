@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "
 import { Input } from "../ui/input";
 import { addBaseUrl } from "~/server/baseUrls";
 import { useState } from "react";
+import { randomInt } from "crypto";
 
 type ManageBaseUrlsDialogProps = {
     setIsDialogOpen: (open: boolean) => void;
@@ -50,8 +51,8 @@ const ManageBaseUrlsDialog = (props: ManageBaseUrlsDialogProps) => {
     {/* Manage current */}
     <div className="p-2 border-gray-900 border-2 rounded-lg">
         <p className="text-lg text-gray-400">Edit</p>
-        {props.baseUrls.map(x=> <>
-                <div className="flex flex-row" key={x.id}>
+        {props.baseUrls?.map((x, index)=> <>
+                <div className="flex flex-row" key={index}>
                 <select value={x.protocol}
                 onChange={(e) => {
                     //setNewProtocol(e.target.value)

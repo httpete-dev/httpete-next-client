@@ -22,7 +22,10 @@ export type DashboardPageProps = {
   endpoints: Endpoint[],
   isDocumentationChanged: boolean,
   buildUrlParams: (search: string, params: UrlParams) => string;
+  activeCollection: Collection,
+  activeWorkspace: Workspace,
   setActiveCollection: (cId: number) => void,
+  setActiveDocumentation: (doc: Doc) => void
   setIsDocumentationChanged: (changed: boolean) => void,
   setEditingTitle: (editing: boolean) => void
   getCollection: (cId: number) => Collection | undefined,
@@ -30,7 +33,6 @@ export type DashboardPageProps = {
   activeEndpoint: Endpoint,
   setActiveEndpoint: (endpoint: Endpoint) => void 
   updateActiveEndpoint: (eId: number) => void
-  setActiveDocumentation: (doc: Doc) => void
   updateParams: (params: UrlParams) => void
   updateCollections: () => void
   setCollectionsLoading: (loading: boolean) => void
@@ -70,6 +72,7 @@ export default function DashboardLayout({
 
   const [activeEndpoint, setActiveEndpoint] = useState({} as Endpoint)
   const [activeDocumentation, setActiveDocumentation] = useState({} as Doc)
+  const [activeCollection, setActiveCollection] = useState({} as Collection) 
 
   const updateActiveEndpoint = (eId: number) => {
     const params = new URLSearchParams(searchParams);
@@ -77,7 +80,7 @@ export default function DashboardLayout({
     setActiveEndpoint(endpoints.find(x => x.id === eId) ?? {} as Endpoint);
   }
 
-  const setActiveCollection = (cId: number) => {
+  const setCollectionUrlParam = (cId: number) => {
     const params = new URLSearchParams(searchParams);
     params.set('collectionId', cId.toString());
   }
@@ -103,7 +106,7 @@ export default function DashboardLayout({
 
 
   useEffect(() => {
-    setActiveCollection(parseInt(searchParams.get('collectionId') ?? '-1'))
+    setCollectionUrlParam(parseInt(searchParams.get('collectionId') ?? '-1'))
     updateActiveEndpoint(parseInt(searchParams.get('endpointId') ?? '-1'))
     // setActiveDocumentation(activeEndpoint.documentation ?? {} as Doc)
   }, [searchParams])
@@ -153,11 +156,11 @@ export default function DashboardLayout({
   function updateWorkspaceData() {
     const userId = parseInt(session?.user?.id ?? '-1');
 
-    if (userId === -1) {
+    if (userId !== -1 ) {
       localStorage.setItem('localMode', 'true');
       setCollectionsLoading(true);
 
-      getLocalWorkspaces().then(res => {
+      getWorkspaces(userId).then(res => { // TODO: replace with userId
         setWorkspaceData(res);
         updateActiveWorkspace(res[0]?.id ?? -1);
         updateActiveEndpoint(parseInt(searchParams?.get('endpointId') ?? '-1'));
@@ -179,27 +182,7 @@ export default function DashboardLayout({
       return;
     }
 
-    getWorkspaces(userId).then(res => {
-      setCollectionsLoading(true);
-      setWorkspaceData(res);
-      updateActiveWorkspace(res[0]?.id ?? -1);
-      updateActiveEndpoint(parseInt(searchParams?.get('endpointId') ?? '-1'));
-      
-      getBaseUrls(res[0]?.id ?? -1).then(ress => {
-        setBaseUrls(ress);
-        const params : UrlParams = {
-          orgId: res[0]?.organizationId.toString(),
-          ws: res[0]?.id.toString(),
-          collectionId: res[0]?.collections[0]?.id.toString(),
-          endpointId: res[0]?.collections[0]?.endpoints[0]?.id.toString()
-        };
-        setCollections(res[0]?.collections ?? [])
-        setEndpoints(res[0]?.collections[0]?.endpoints ?? [])
-        
-        setCollectionsLoading(false);
-        updateParams(params)
-      })
-    });
+    
   }
   
   function setParam(pName: string, val?: string) {
@@ -239,8 +222,12 @@ export default function DashboardLayout({
 
       {usePathname() === '/dashboard' ?
         <Dashboard
-          collectionsLoading={collectionsLoading}
-          setCollectionsLoading={setCollectionsLoading}
+          activeCollection={activeCollection}
+          setActiveEndpoint={setActiveEndpoint}
+          setActiveWorkspace={setActiveWorkspace}
+          activeWorkspace={activeWorkspace}
+          setActiveCollection={setCollectionUrlParam}
+          
           updateCollections={updateCollections}
           updateParams={updateParams}
           getCollection={getCollection}
@@ -249,10 +236,8 @@ export default function DashboardLayout({
           buildUrlParams={buildUrlParams}
           collections={collections}
           isDocumentationChanged={isDocumentationChanged}
-          setActiveCollection={setActiveCollection}
           activeEndpoint={activeEndpoint}
           // setActiveDocumentation={setActiveDocumentation}
-          setActiveEndpoint={setActiveEndpoint}
           updateActiveEndpoint={updateActiveEndpoint}
           setIsDocumentationChanged={setIsDocumentationChanged}
           setEditingTitle={setEditingTitle}

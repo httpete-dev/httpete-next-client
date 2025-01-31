@@ -14,17 +14,20 @@ export type PageProps = {
 /// - If pete-debug is set, use http://localhost:5273/api - HttPete local WebAPI
 /// - Otherwise, use https://api.httpete.com/api - HttPete production WebAPI
 export const getBaseUrl = () => {
-  const isLocalMode = true; //process.env.NEXT_PUBLIC_LOCAL_MODE === "true" ?? true;
-  const isDebugMode = true; //process.env.NEXT_PUBLIC_PETE_DEBUG === "true" ?? true;
+  const isLocalMode = process.env.NEXT_PUBLIC_LOCAL_MODE === "true";
+  const isDebugMode = process.env.NEXT_PUBLIC_PETE_DEBUG === "true";
+
+  console.log('isLocalMode', isLocalMode)
+  console.log('isDebugMode', isDebugMode)
 
   const pulseLocalApiUrl = 'https://localhost:7194/api';
-  const localHttpeteApiUrl = 'http://localhost:5273/api';
+  const debugHttpeteApiUrl = 'http://localhost:5273/api';
   const productionHttpeteApiUrl = 'https://api.httpete.com/api';
-  
+
   return isLocalMode 
             ? pulseLocalApiUrl 
             : isDebugMode 
-                ? localHttpeteApiUrl
+                ? debugHttpeteApiUrl
                 : productionHttpeteApiUrl;
 }
 
