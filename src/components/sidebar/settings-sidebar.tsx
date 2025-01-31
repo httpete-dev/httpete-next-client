@@ -84,10 +84,10 @@ const SettingsSidebar = (props: SettingsSidebarProps) => {
             <section className="mt-4">
               {options.map(x =>
                 <Button variant={'secondary'} 
-                onClick={() => {props.setActivePage(x.name)}}
+                onMouseDown={() => {props.setActivePage(x.name)}}
                   className={
                     "flex flex-row w-12 lg:w-full mb-5 "
-                    +(props.activePage === x.name ? ' bg-white text-black' : ' bg-transparent border-2 text-white')}>
+                    +(props.activePage === x.name ? ' bg-white text-black' : ' bg-transparent border-2 text-white hover:bg-gray-700')}>
                   {x.icon}
                   {!isMobile && <span>{x.name}</span>}
                 </Button>

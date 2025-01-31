@@ -18,12 +18,12 @@ import Loading from "~/components/Loading"
 import axios from "axios"
 import { prettifyJson } from "~/lib/utils"
 import TestsForEndpoint from "~/components/TestsForEndpoint"
-import WysiwygEditor from "~/components/api-client/documentation/WYSIYYGEditor"
 import MarkdownEditor from "~/components/markdown-editor"
 import { addBaseUrl } from "~/server/baseUrls"
 import ManageBaseUrlsDialog from "~/components/api-client/ManageBaseUrlsDialog"
 import toastr from "toastr"
 import EnvironmentVariables from "~/components/api-client/EnvironmentVariables"
+import WysiwygEditor from "~/components/documentation/WYSIYYGEditor"
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: true });
 
 const pulsingAnimation = `

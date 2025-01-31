@@ -231,7 +231,7 @@ export const DashboardBtnLarge = (props: DashboardBtnLargeProps) => {
     }, [path])
 
     return <>
-        <button onClick={() => {
+        <button onMouseDown={() => {
             setLoading(true);
             router.push(props.path)
         }}
